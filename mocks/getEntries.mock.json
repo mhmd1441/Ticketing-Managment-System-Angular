@@ -1,0 +1,56 @@
+{
+  "name": "get entries",
+  "request": {
+    "url": "/GetEntries",
+    "method": "GET"
+  },
+  "responses": {
+    "success": {
+      "default": true,
+      "status": 200,
+      "data": [
+        {
+          "entryId": 1,
+          "providerId": "202300233",
+          "supportedUserId": "E20241191",
+          "faculty": "Law",
+          "notes": "Follow-up call regarding portal access issue",
+          "channel": "Email",
+          "term": 202610,
+          "startDateTime": "2026-08-14T08:30:00",
+          "endDateTime": "2026-08-14T09:15:00"
+        },
+        {
+          "entryId": 2,
+          "providerId": "202200104",
+          "supportedUserId": "E20250042",
+          "faculty": "Medicine",
+          "notes": "In-person consultation for clinical software permissions",
+          "channel": "In-Person",
+          "term": 202610,
+          "startDateTime": "2026-08-14T10:00:00",
+          "endDateTime": "2026-08-14T10:30:00"
+        },
+        {
+          "entryId": 3,
+          "providerId": "202400588",
+          "supportedUserId": "E20230811",
+          "faculty": "Science",
+          "notes": "Password reset request and multi-factor setup",
+          "channel": "Phone",
+          "term": 202610,
+          "startDateTime": "2026-08-14T11:15:00",
+          "endDateTime": "2026-08-14T11:45:00"
+        }
+      ]
+    },
+    "empty": {
+      "status": 200,
+      "data": []
+    },
+    "server_error": {
+      "status": 500,
+      "data": {}
+    }
+  }
+}

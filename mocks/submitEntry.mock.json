@@ -1,0 +1,23 @@
+{
+  "name": "submit entry",
+  "request": {
+    "url": "/SubmitEntry",
+    "method": "POST"
+  },
+  "responses": {
+    "success": {
+      "default": true,
+      "status": 200,
+      "data": {
+        "entryId": 4,
+        "message": "Entry saved successfully"
+      }
+    },
+    "validation_error": {
+      "status": 400,
+      "data": {
+        "message": "Missing required fields or invalid date selection"
+      }
+    }
+  }
+}
