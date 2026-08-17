@@ -10,8 +10,8 @@
             "status": 200,
             "data": {
                 "entryId": 1,
-                "providerId": "202300233",
-                "supportedUserId": "E20241191",
+                "providerId": "E20241191",
+                "supportedUserId": "123456789",
                 "faculty": "Law",
                 "notes": "Follow-up call regarding portal access issue",
                 "channel": "Email",
