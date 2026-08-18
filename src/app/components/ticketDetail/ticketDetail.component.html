@@ -1,0 +1,19 @@
+<a routerLink="/panel">&larr; Back to list</a>
+
+@if (isLoading) {
+  <p>Loading...</p>
+}
+
+@if (hasError) {
+  <p>Could not load this ticket.</p>
+}
+
+@if (entry) {
+  <h3>Ticket {{ entry.ticketId }}</h3>
+  <p><strong>Reporter ID:</strong> {{ entry.reporterId }}</p>
+  <p><strong>Staff ID:</strong> {{ entry.staffId }}</p>
+  <p><strong>Faculty:</strong> {{ entry.faculty }}</p>
+  <p><strong>Description:</strong> {{ entry.description }}</p>
+  <p><strong>Channel:</strong> {{ entry.channel }}</p>
+  <p><strong>Term:</strong> {{ entry.term }}</p>
+}

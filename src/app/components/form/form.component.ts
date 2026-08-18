@@ -5,7 +5,10 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EnvironmentService } from '../../services/environment.service';
+import { ApisService } from '../../services/apis.service';
+import { Entry } from '../../models/entry';
 
 @Component({
   selector: 'app-form',
@@ -31,17 +34,47 @@ export class FormComponent implements OnInit {
     channel: new FormControl('', Validators.required),
   });
 
-  constructor(private envService: EnvironmentService) {}
+  constructor(
+    private envService: EnvironmentService,
+    private apisService: ApisService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-    this.faculties = this.envService.faculties;
-  }
+  this.faculties = this.envService.faculties;
+
+  this.form.controls.staffId.valueChanges.subscribe(value => {
+    if (value) {
+      this.form.controls.staffId.setValue(value.toUpperCase(), { emitEvent: false });
+    }
+  });
+}
 
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
+
+    const formValue = this.form.value;
+    const newEntry: Entry = {
+      ticketId: '',
+      reporterId: formValue.reporterId!,
+      staffId: formValue.staffId!,
+      faculty: formValue.faculty!,
+      description: formValue.description!,
+      channel: formValue.channel!,
+      term: this.envService.currentTerm,
+    };
+
+    this.apisService.submitEntry(newEntry).subscribe({
+      next: (response) => {
+        newEntry.ticketId = 'T' + Date.now();
+        this.apisService.addLocalEntry(newEntry);
+        this.form.reset();
+        this.router.navigate(['/panel']);
+      },
+      error: (err) => console.error('Error submitting ticket:', err),
+    });
   }
 }

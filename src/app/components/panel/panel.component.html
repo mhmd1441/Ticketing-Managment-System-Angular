@@ -18,7 +18,7 @@
       <th>Channel</th>
     </tr>
     @for (entry of entries; track entry.ticketId) {
-      <tr>
+      <tr [routerLink]="['/panel', entry.ticketId]" style="cursor: pointer">
         <td>{{ entry.ticketId }}</td>
         <td>{{ entry.faculty }}</td>
         <td>{{ entry.description }}</td>
