@@ -1,1 +1,29 @@
-<p>panel works!</p>
+<h3>Ticket List</h3>
+<a routerLink="/form">+ New Ticket</a>
+
+@if (isLoading) {
+  <p>Loading...</p>
+}
+
+@if (hasError) {
+  <p>Something went wrong loading tickets.</p>
+}
+
+@if (!isLoading && !hasError) {
+  <table>
+    <tr>
+      <th>Ticket ID</th>
+      <th>Faculty</th>
+      <th>Description</th>
+      <th>Channel</th>
+    </tr>
+    @for (entry of entries; track entry.ticketId) {
+      <tr>
+        <td>{{ entry.ticketId }}</td>
+        <td>{{ entry.faculty }}</td>
+        <td>{{ entry.description }}</td>
+        <td>{{ entry.channel }}</td>
+      </tr>
+    }
+  </table>
+}

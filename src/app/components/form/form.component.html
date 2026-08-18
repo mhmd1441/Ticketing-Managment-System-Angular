@@ -1,1 +1,32 @@
-<p>form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Reporter ID (Student)</label>
+  <input formControlName="reporterId" />
+
+  @if (form.controls.reporterId.invalid && form.controls.reporterId.touched) {
+    <small>Invalid or missing Reporter ID</small>
+  }
+
+  <label>Staff ID</label>
+  <input formControlName="staffId" />
+
+  <label>Faculty</label>
+  <select formControlName="faculty">
+    <option value="">-- select faculty --</option>
+    @for (fac of faculties; track fac) {
+      <option [value]="fac">{{ fac }}</option>
+    }
+  </select>
+
+  <label>Description</label>
+  <textarea formControlName="description"></textarea>
+
+  <label>Channel</label>
+  <select formControlName="channel">
+    <option value="">-- select channel --</option>
+    <option value="Email">Email</option>
+    <option value="WhatsApp">WhatsApp</option>
+    <option value="In-Person">In-Person</option>
+  </select>
+
+  <button type="submit">Submit Ticket</button>
+</form>
