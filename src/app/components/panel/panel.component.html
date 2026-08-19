@@ -25,25 +25,33 @@
     </div>
   </div>
   <table class="table ticket-table">
-    <tr>
-      <th>Ticket ID</th>
-      <th>Reporter ID</th>
-      <th>Faculty</th>
-      <th class="description-col">Description</th>
-      <th>Channel</th>
-    </tr>
-    @for (entry of filteredEntries; track entry.ticketId) {
-      <tr
-        class="data-row"
-        [routerLink]="['/panel', entry.ticketId]"
-        style="cursor: pointer"
-      >
-        <td>{{ entry.ticketId }}</td>
-        <td>{{ entry.reporterId }}</td>
-        <td>{{ entry.faculty }}</td>
-        <td class="description-col">{{ entry.description }}</td>
-        <td>{{ entry.channel }}</td>
+    <thead>
+      <tr>
+        <th>Ticket ID</th>
+        <th>Reporter ID</th>
+        <th>Faculty</th>
+        <th>Category</th>
+        <th>Channel</th>
+        <th class="description-col">Description</th>
+        <th>Status</th>
       </tr>
-    }
+    </thead>
+    <tbody>
+      @for (entry of filteredEntries; track entry.ticketId) {
+        <tr
+          class="data-row"
+          [routerLink]="['/panel', entry.ticketId]"
+          style="cursor: pointer"
+        >
+          <td>{{ entry.ticketId }}</td>
+          <td>{{ entry.reporterId }}</td>
+          <td>{{ entry.faculty }}</td>
+          <td>{{ entry.category }}</td>
+          <td>{{ entry.channel }}</td>
+          <td class="description-col">{{ entry.description }}</td>
+          <td>{{ entry.status }}</td>
+        </tr>
+      }
+    </tbody>
   </table>
 }

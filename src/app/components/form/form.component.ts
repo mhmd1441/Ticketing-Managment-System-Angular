@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -19,6 +25,8 @@ import { Entry } from '../../models/entry';
 })
 export class FormComponent implements OnInit {
   faculties: string[] = [];
+  categories: string[] = [];
+  tags: string[] = [];
 
   form = new FormGroup({
     reporterId: new FormControl('', [
@@ -32,6 +40,8 @@ export class FormComponent implements OnInit {
     faculty: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     channel: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required),
+    tags: new FormControl<string[]>([], Validators.required),
   });
 
   constructor(
@@ -40,8 +50,23 @@ export class FormComponent implements OnInit {
     private router: Router,
   ) {}
 
+  @ViewChild('tagPicker') tagPickerRef!: ElementRef;
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (
+      this.showTagDropdown &&
+      this.tagPickerRef &&
+      !this.tagPickerRef.nativeElement.contains(event.target)
+    ) {
+      this.showTagDropdown = false;
+    }
+  }
+
   ngOnInit(): void {
     this.faculties = this.envService.faculties;
+    this.categories = this.envService.categories;
+    this.tags = this.envService.tags;
 
     this.form.controls.staffId.valueChanges.subscribe((value) => {
       if (value) {
@@ -52,6 +77,44 @@ export class FormComponent implements OnInit {
     });
   }
 
+  showTagDropdown = false;
+  tagSearch = '';
+
+  toggleTagDropdown(): void {
+    this.showTagDropdown = !this.showTagDropdown;
+  }
+
+  onTagSearch(event: Event): void {
+    this.tagSearch = (event.target as HTMLInputElement).value.toLowerCase();
+  }
+
+  filteredTags(): string[] {
+    return this.tags.filter((t) => t.toLowerCase().includes(this.tagSearch));
+  }
+
+  isTagSelected(tag: string): boolean {
+    return (this.form.controls.tags.value || []).includes(tag);
+  }
+
+  onTagToggle(tag: string): void {
+    const current = this.form.controls.tags.value || [];
+    if (current.includes(tag)) {
+      this.form.controls.tags.setValue(current.filter((t) => t !== tag));
+    } else {
+      this.form.controls.tags.setValue([...current, tag]);
+    }
+    this.form.controls.tags.markAsTouched();
+  }
+
+  removeTag(tag: string, event: Event): void {
+    event.stopPropagation();
+    const current = this.form.controls.tags.value || [];
+    this.form.controls.tags.setValue(current.filter((t) => t !== tag));
+  }
+  clearAllTags(event: Event): void {
+    event.stopPropagation();
+    this.form.controls.tags.setValue([]);
+  }
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -67,6 +130,10 @@ export class FormComponent implements OnInit {
       description: formValue.description!,
       channel: formValue.channel!,
       term: this.envService.currentTerm,
+      category: formValue.category!,
+      tags: formValue.tags!,
+      status: 'Assigned',
+      startDate: new Date().toISOString(),
     };
 
     this.apisService.submitEntry(newEntry).subscribe({

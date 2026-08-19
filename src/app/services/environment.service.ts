@@ -23,4 +23,11 @@ export class EnvironmentService {
   get faculties(): string[] {
     return this.config.faculties || [];
   }
+  get categories(): string[] {
+    return this.config.categories || [];
+  }
+
+  get tags(): string[] {
+    return this.config.tags || [];
+  }
 }

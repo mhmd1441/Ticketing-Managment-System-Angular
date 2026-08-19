@@ -6,4 +6,9 @@ export interface Entry {
   description: string;
   channel: string;
   term: string;
+  category: string;
+  tags: string[];
+  status: string;
+  startDate: string;
+  endDate?: string;
 }

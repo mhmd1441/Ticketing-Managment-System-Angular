@@ -15,7 +15,12 @@
         "faculty": "Law",
         "description": "Follow-up call regarding portal access issue",
         "channel": "Email",
-        "term": "202610"
+        "term": "202610",
+        "category": "iConnect",
+        "tags": ["No Internet/Firefox"],
+        "status": "Solved",
+        "startDate": "2026-08-14T08:30:00",
+        "endDate": "2026-08-14T09:15:00"
       }
     },
     "not_found": {
