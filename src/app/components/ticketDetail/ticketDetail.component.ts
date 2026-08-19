@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApisService } from '../../services/apis.service';
 import { Entry } from '../../models/entry';
+import { LoadingPreviewComponent } from '../shared/loadingPreview/loadingPreview.component';
 
 @Component({
   selector: 'app-ticket-detail',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,LoadingPreviewComponent],
   templateUrl: './ticketDetail.component.html',
   styleUrl: './ticketDetail.component.css'
 })

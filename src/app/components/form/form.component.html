@@ -1,32 +1,77 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>Reporter ID (Student)</label>
-  <input formControlName="reporterId" />
+<div class="card card-primary mt-3">
+  <div class="card-header">
+    <h3 class="card-title">New Ticket</h3>
+  </div>
 
-  @if (form.controls.reporterId.invalid && form.controls.reporterId.touched) {
-    <small>Invalid or missing Reporter ID</small>
-  }
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <div class="form-group">
+        <label>Reporter ID (Student)</label>
+        <input formControlName="reporterId" class="form-control" />
+        @if (
+          form.controls.reporterId.invalid && form.controls.reporterId.touched
+        ) {
+          <small>Invalid or missing Reporter ID</small>
+        }
+      </div>
 
-  <label>Staff ID</label>
-  <input formControlName="staffId" />
+      <div class="form-group">
+        <label>Staff ID</label>
+        <input formControlName="staffId" class="form-control" />
+        @if (form.controls.staffId.invalid && form.controls.staffId.touched) {
+          <small>Invalid or missing Staff ID</small>
+        }
+      </div>
 
-  <label>Faculty</label>
-  <select formControlName="faculty">
-    <option value="">-- select faculty --</option>
-    @for (fac of faculties; track fac) {
-      <option [value]="fac">{{ fac }}</option>
-    }
-  </select>
+      <div class="form-group">
+        <label>Faculty</label>
+        <select formControlName="faculty" class="form-control">
+          <option value="">-- Select Faculty --</option>
+          @for (fac of faculties; track fac) {
+            <option [value]="fac">{{ fac }}</option>
+          }
+        </select>
+        @if (form.controls.faculty.invalid && form.controls.faculty.touched) {
+          <small>Please select a faculty</small>
+        }
+      </div>
 
-  <label>Description</label>
-  <textarea formControlName="description"></textarea>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          formControlName="description"
+          class="form-control"
+          rows="4"
+        ></textarea>
+        @if (
+          form.controls.description.invalid && form.controls.description.touched
+        ) {
+          <small>Description is required</small>
+        }
+      </div>
 
-  <label>Channel</label>
-  <select formControlName="channel">
-    <option value="">-- select channel --</option>
-    <option value="Email">Email</option>
-    <option value="WhatsApp">WhatsApp</option>
-    <option value="In-Person">In-Person</option>
-  </select>
+      <div class="form-group">
+        <label>Channel</label>
+        <select formControlName="channel" class="form-control">
+          <option value="">-- Select Channel --</option>
+          <option value="Email">Email</option>
+          <option value="WhatsApp">WhatsApp</option>
+          <option value="In-Person">In-Person</option>
+        </select>
+        @if (form.controls.channel.invalid && form.controls.channel.touched) {
+          <small>Please select a channel</small>
+        }
+      </div>
+    </div>
 
-  <button type="submit">Submit Ticket</button>
-</form>
+    <div class="card-footer">
+      <button
+        type="submit"
+        class="btn"
+        style="background-color: #1a4a7a; color: white"
+      >
+        Submit Ticket
+      </button>
+    </div>
+  </form>
+</div>

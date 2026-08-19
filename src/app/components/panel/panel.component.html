@@ -1,8 +1,9 @@
-<h3>Ticket List</h3>
-<a routerLink="/form">+ New Ticket</a>
+<h3 class="text-center">Ticket List</h3>
+
+<a routerLink="/form" class="btn mb-3 addTicket">+ New Ticket</a>
 
 @if (isLoading) {
-  <p>Loading...</p>
+  <app-loadingPreview />
 }
 
 @if (hasError) {
@@ -10,18 +11,37 @@
 }
 
 @if (!isLoading && !hasError) {
-  <table>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      placeholder="Search by ticket ID, reporter, faculty, or description..."
+      (input)="onSearch($event)"
+      class="form-control"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+  <table class="table ticket-table">
     <tr>
       <th>Ticket ID</th>
+      <th>Reporter ID</th>
       <th>Faculty</th>
-      <th>Description</th>
+      <th class="description-col">Description</th>
       <th>Channel</th>
     </tr>
-    @for (entry of entries; track entry.ticketId) {
-      <tr [routerLink]="['/panel', entry.ticketId]" style="cursor: pointer">
+    @for (entry of filteredEntries; track entry.ticketId) {
+      <tr
+        class="data-row"
+        [routerLink]="['/panel', entry.ticketId]"
+        style="cursor: pointer"
+      >
         <td>{{ entry.ticketId }}</td>
+        <td>{{ entry.reporterId }}</td>
         <td>{{ entry.faculty }}</td>
-        <td>{{ entry.description }}</td>
+        <td class="description-col">{{ entry.description }}</td>
         <td>{{ entry.channel }}</td>
       </tr>
     }

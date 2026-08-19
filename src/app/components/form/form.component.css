@@ -3,3 +3,11 @@ small {
   display: block;
   margin-bottom: 8px;
 }
+.card-header {
+  background-color: #1a4a7a !important;
+  color: white;
+}
+.card-title {
+  text-align: center;
+  width: 100%;
+}

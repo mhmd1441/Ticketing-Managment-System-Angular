@@ -1,7 +1,7 @@
-<a routerLink="/panel">&larr; Back to list</a>
+<a routerLink="/panel" class="btn mb-2 BackToList">&larr; BackToList</a>
 
 @if (isLoading) {
-  <p>Loading...</p>
+  <app-loadingPreview />
 }
 
 @if (hasError) {
@@ -9,11 +9,49 @@
 }
 
 @if (entry) {
-  <h3>Ticket {{ entry.ticketId }}</h3>
-  <p><strong>Reporter ID:</strong> {{ entry.reporterId }}</p>
-  <p><strong>Staff ID:</strong> {{ entry.staffId }}</p>
-  <p><strong>Faculty:</strong> {{ entry.faculty }}</p>
-  <p><strong>Description:</strong> {{ entry.description }}</p>
-  <p><strong>Channel:</strong> {{ entry.channel }}</p>
-  <p><strong>Term:</strong> {{ entry.term }}</p>
+  <div class="card card-primary mt-3">
+    <div class="card-header">
+      <h3 class="card-title ticket-heading">Ticket {{ entry.ticketId }}</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="section-title"><i class="fas fa-user"></i> Reporter</h5>
+          <p>
+            <i class="fas fa-id-badge"></i> <strong>Reporter ID:</strong>
+            {{ entry.reporterId }}
+          </p>
+          <p>
+            <i class="fas fa-user-tie"></i> <strong>Staff ID:</strong>
+            {{ entry.staffId }}
+          </p>
+          <p>
+            <i class="fas fa-university"></i> <strong>Faculty:</strong>
+            {{ entry.faculty }}
+          </p>
+        </div>
+
+        <div class="col-md-6">
+          <h5 class="section-title">
+            <i class="fas fa-ticket-alt"></i> Ticket Info
+          </h5>
+          <p>
+            <i class="fas fa-comment-dots"></i> <strong>Channel:</strong>
+            {{ entry.channel }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-alt"></i> <strong>Term:</strong>
+            {{ entry.term }}
+          </p>
+        </div>
+      </div>
+
+      <hr />
+
+      <h5 class="section-title">
+        <i class="fas fa-align-left"></i> Description
+      </h5>
+      <p class="description-text">{{ entry.description }}</p>
+    </div>
+  </div>
 }

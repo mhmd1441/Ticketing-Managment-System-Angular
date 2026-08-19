@@ -41,14 +41,16 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.faculties = this.envService.faculties;
+    this.faculties = this.envService.faculties;
 
-  this.form.controls.staffId.valueChanges.subscribe(value => {
-    if (value) {
-      this.form.controls.staffId.setValue(value.toUpperCase(), { emitEvent: false });
-    }
-  });
-}
+    this.form.controls.staffId.valueChanges.subscribe((value) => {
+      if (value) {
+        this.form.controls.staffId.setValue(value.toUpperCase(), {
+          emitEvent: false,
+        });
+      }
+    });
+  }
 
   onSubmit() {
     if (this.form.invalid) {
@@ -69,7 +71,7 @@ export class FormComponent implements OnInit {
 
     this.apisService.submitEntry(newEntry).subscribe({
       next: (response) => {
-        newEntry.ticketId = 'T' + Date.now();
+        newEntry.ticketId = this.apisService.generateTicketId();
         this.apisService.addLocalEntry(newEntry);
         this.form.reset();
         this.router.navigate(['/panel']);

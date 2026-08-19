@@ -1,0 +1,45 @@
+.ticket-heading {
+  font-size: 20px;
+  text-align: center;
+}
+.addTicket {
+  float: right;
+  background-color: #1a4a7a;
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.addTicket:hover {
+  background-color: #123454;
+  color: white;
+}
+
+.BackToList {
+  background-color: #1a4a7a;
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.BackToList:hover {
+  background-color: #123454;
+  color: white;
+}
+.section-title {
+  color: #1a4a7a;
+  border-bottom: 2px solid #1a4a7a;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.description-text {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.card-header{
+  font-size: 20px;
+  text-align: center;
+}

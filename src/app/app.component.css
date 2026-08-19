@@ -1,4 +1,10 @@
 /* app.component.css */
 .main-sidebar {
-  background-color: #25c46c !important;
+  background-color: #1a4a7a !important;
+}
+.main-footer {
+  text-align: center;
+}
+.nav-sidebar .nav-link.active {
+  background-color: #123454;
 }

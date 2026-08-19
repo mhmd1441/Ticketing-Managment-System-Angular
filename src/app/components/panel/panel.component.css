@@ -1,0 +1,23 @@
+.ticket-table {
+  font-size: 18px;
+}
+.ticket-table tr:hover {
+  background-color: #f0f0f0;
+}
+
+.description-col {
+  width: 45%;
+}
+
+.addTicket {
+  float: right;
+  background-color: #1a4a7a;
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.addTicket:hover {
+  background-color: #123454;
+  color: white;
+}
