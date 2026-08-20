@@ -1,3 +1,45 @@
 {
-  "apiBaseUrl": ""
+  "apiBaseUrl": "/api",
+  "currentTerm": "202610",
+  "faculties": [
+    "Law",
+    "Medicine",
+    "Science",
+    "Engineering",
+    "Business",
+    "Arts",
+    "Pharmacy",
+    "Architecture",
+    "Nursing",
+    "Education"
+  ],
+  "categories": ["Moodle", "iConnect", "O365", "Banner", "Network", "AD"],
+  "tags": [
+    "Browser Issue",
+    "Mobile Issue",
+    "User Issue",
+    "Android",
+    "Mobile",
+    "Mac",
+    "iOS",
+    "Safari",
+    "Chrome",
+    "App Sync Issue",
+    "Forget Password/Credentials",
+    "Courses assigned to S ID instead of F ID",
+    "Inactive Due to Graduation",
+    "Sign Up",
+    "No Profile Photo",
+    "Update Info",
+    "High Maintenance User",
+    "Firefox",
+    "No Internet",
+    "Banner"
+  ],
+  "statuses": ["Assigned", "In Progress", "Pending", "Escalated", "Solved"],
+  "endpoints": {
+    "GetEntries": "/GetEntries",
+    "SubmitEntry": "/SubmitEntry",
+    "GetEntryById": "/GetEntryById"
+  }
 }

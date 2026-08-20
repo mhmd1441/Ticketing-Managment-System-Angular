@@ -1,0 +1,157 @@
+small {
+  color: red;
+  display: block;
+  margin-bottom: 8px;
+}
+.card-header {
+  background-color: #1a4a7a !important;
+  color: white;
+}
+.card-title {
+  text-align: center;
+  width: 100%;
+}
+.tag-picker {
+  position: relative;
+}
+
+.tag-picker-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+}
+
+.tag-chip {
+  background-color: #e9ecef;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tag-chip-remove {
+  cursor: pointer;
+  font-weight: bold;
+  color: #6c757d;
+}
+
+.tag-chip-remove:hover {
+  color: #dc3545;
+}
+
+.tag-placeholder {
+  color: #6c757d;
+}
+
+.tag-count {
+  margin-left: auto;
+  background-color: #1a4a7a;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+}
+
+.tag-dropdown {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 250px;
+  overflow-y: auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.tag-search {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+.tag-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.tag-list-item input[type="checkbox"] {
+  accent-color: #1a4a7a;
+  pointer-events: none;
+}
+.tag-list-item:hover {
+  background-color: #f8f9fa;
+}
+.tag-picker-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-clear-all {
+  cursor: pointer;
+  color: #6c757d;
+  font-weight: bold;
+}
+.tag-clear-all:hover {
+  color: #dc3545;
+}
+
+.tag-chevron {
+  transition: transform 0.2s ease;
+  color: #6c757d;
+  font-size: 0.75rem;
+}
+.tag-chevron-open {
+  transform: rotate(180deg);
+}
+
+.tag-list-item.selected {
+  background-color: #eef2ff;
+}
+
+.tag-list-item input[type="checkbox"] {
+  accent-color: #1a4a7a;
+}
+.submit-btn {
+  background-color: #1a4a7a;
+  color: white;
+}
+
+.submit-btn:disabled {
+  background-color: #adb5bd;
+  color: white;
+  cursor: not-allowed;
+}
+.channel-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.channel-btn {
+  border-radius: 6px;
+  padding: 5px 16px;
+  font-size: 0.9rem;
+}
+
+.channel-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}

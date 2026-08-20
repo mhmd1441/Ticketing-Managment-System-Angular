@@ -1,0 +1,102 @@
+<a routerLink="/AdminDashboard/panel" class="btn mb-2 BackToList"
+  >&larr; BackToList</a
+>
+
+@if (isLoading) {
+  <app-loadingPreview />
+}
+
+@if (hasError) {
+  <p>Could not load this ticket.</p>
+}
+
+@if (entry) {
+  <div class="card card-primary mt-3">
+    <div class="card-header">
+      <h3 class="card-title ticket-heading">Ticket {{ entry.ticketId }}</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="section-title"><i class="fas fa-user"></i> Reporter</h5>
+          <p>
+            <i class="fas fa-id-badge"></i> <strong>Reporter ID:</strong>
+            {{ entry.reporterId }}
+          </p>
+          <p>
+            <i class="fas fa-user-tie"></i> <strong>Staff ID:</strong>
+            {{ entry.staffId }}
+          </p>
+          <p>
+            <i class="fas fa-university"></i> <strong>Faculty:</strong>
+            {{ entry.faculty }}
+          </p>
+        </div>
+
+        <div class="col-md-6">
+          <h5 class="section-title">
+            <i class="fas fa-ticket-alt"></i> Ticket Info
+          </h5>
+          <p>
+            <i class="fas fa-comment-dots"></i> <strong>Channel:</strong>
+            {{ entry.channel }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-alt"></i> <strong>Term:</strong>
+            {{ entry.term }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-plus"></i> <strong>Started:</strong>
+            {{ entry.startDate | date: "medium" }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-check"></i> <strong>Ended:</strong>
+            {{ entry.endDate ? (entry.endDate | date: "medium") : "Not yet" }}
+          </p>
+        </div>
+      </div>
+
+      <hr />
+      <h5 class="section-title"><i class="fas fa-flag"></i> Status</h5>
+      <p>
+        <span [class]="getStatusClass(entry.status)">{{ entry.status }}</span>
+      </p>
+
+      <div class="input-group" style="max-width: 400px">
+        <select
+          class="form-control"
+          [(ngModel)]="selectedStatus"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          @for (s of statuses; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+        <div class="input-group-append">
+          <button
+            class="btn submit-btn"
+            (click)="updateStatus()"
+            [disabled]="isUpdating || selectedStatus === entry.status"
+          >
+            @if (isUpdating) {
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            } @else {
+              <span>Update</span>
+            }
+          </button>
+        </div>
+      </div>
+
+      <hr />
+      <h6 class="section-title">
+        <i class="fas fa-align-left"></i> Description
+      </h6>
+      <p class="description-text">{{ entry.description }}</p>
+    </div>
+    <hr />
+  </div>
+}

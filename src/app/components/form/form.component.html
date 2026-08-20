@@ -1,1 +1,169 @@
-<p>form works!</p>
+<div class="card card-primary mt-3">
+  <div class="card-header">
+    <h3 class="card-title">New Ticket</h3>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card-body">
+      <div class="form-group">
+        <label>Reporter ID (Student)</label>
+        <input formControlName="reporterId" class="form-control" />
+        @if (
+          form.controls.reporterId.invalid && form.controls.reporterId.touched
+        ) {
+          <small>Invalid or missing Reporter ID</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Staff ID</label>
+        <input formControlName="staffId" class="form-control" />
+        @if (form.controls.staffId.invalid && form.controls.staffId.touched) {
+          <small>Invalid or missing Staff ID</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Faculty</label>
+        <select formControlName="faculty" class="form-control">
+          <option value="">-- Select Faculty --</option>
+          @for (fac of faculties; track fac) {
+            <option [value]="fac">{{ fac }}</option>
+          }
+        </select>
+        @if (form.controls.faculty.invalid && form.controls.faculty.touched) {
+          <small>Please select a faculty</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          formControlName="description"
+          class="form-control"
+          rows="4"
+        ></textarea>
+        @if (
+          form.controls.description.invalid && form.controls.description.touched
+        ) {
+          <small>Description is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Channel</label>
+        <div class="channel-group">
+          @for (ch of channels; track ch) {
+            <label
+              class="btn btn-outline-primary channel-btn"
+              [class.active]="form.controls.channel.value === ch"
+            >
+              <input
+                type="radio"
+                formControlName="channel"
+                [value]="ch"
+                autocomplete="off"
+              />
+              {{ ch }}
+            </label>
+          }
+        </div>
+        @if (form.controls.channel.invalid && form.controls.channel.touched) {
+          <small>Please select a channel</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <select formControlName="category" class="form-control">
+          <option value="">-- Select Category --</option>
+          @for (cat of categories; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+        @if (form.controls.category.invalid && form.controls.category.touched) {
+          <small>Please select a category</small>
+        }
+      </div>
+
+      <div class="form-group tag-picker" #tagPicker>
+        <label>Tags</label>
+        <div class="tag-picker-box" (click)="toggleTagDropdown()">
+          @for (tag of form.controls.tags.value; track tag) {
+            <span class="tag-chip">
+              {{ tag }}
+              <span class="tag-chip-remove" (click)="removeTag(tag, $event)"
+                >&times;</span
+              >
+            </span>
+          }
+          @if (!form.controls.tags.value?.length) {
+            <span class="tag-placeholder">Select tags...</span>
+          }
+          <div class="tag-picker-right">
+            @if (form.controls.tags.value?.length) {
+              <span class="tag-count">{{
+                form.controls.tags.value!.length
+              }}</span>
+              <span class="tag-clear-all" (click)="clearAllTags($event)"
+                >&times;</span
+              >
+            }
+            <i
+              class="fas fa-chevron-down tag-chevron"
+              [class.tag-chevron-open]="showTagDropdown"
+            ></i>
+          </div>
+        </div>
+
+        @if (showTagDropdown) {
+          <div class="tag-dropdown">
+            <input
+              type="text"
+              class="form-control tag-search"
+              placeholder="Search"
+              (input)="onTagSearch($event)"
+            />
+            <div class="tag-list">
+              @for (tag of filteredTags(); track tag) {
+                <div
+                  class="tag-list-item"
+                  [class.selected]="isTagSelected(tag)"
+                  (click)="onTagToggle(tag)"
+                >
+                  <input
+                    type="checkbox"
+                    [checked]="isTagSelected(tag)"
+                    readonly
+                  />
+                  <span>{{ tag }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+        @if (form.controls.tags.invalid && form.controls.tags.touched) {
+          <small>Select at least one tag</small>
+        }
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        type="submit"
+        class="btn submit-btn"
+        [disabled]="form.invalid || isSubmitting"
+      >
+        @if (isSubmitting) {
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          <span> Submitting...</span>
+        } @else {
+          <span>Submit Ticket</span>
+        }
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,73 @@
+.ticket-table {
+  font-size: 18px;
+}
+.ticket-table tr:hover {
+  background-color: #f0f0f0;
+}
+
+.description-col {
+  width: 45%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.addTicket {
+  float: right;
+  background-color: #1a4a7a;
+  color: white;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.addTicket:hover {
+  background-color: #123454;
+  color: white;
+}
+.search-input {
+  border-radius: 6px 0 0 6px !important;
+}
+
+.search-btn {
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.filter-select {
+  border-radius: 6px !important;
+}
+.highlight-id {
+  color: #1a4a7a;
+  font-weight: 600;
+}
+.badge {
+  display: inline-block;
+  min-width: 90px;
+  text-align: center;
+  padding: 5px 8px;
+}
+.ticket-table th {
+  user-select: none;
+}
+
+.sort-icon {
+  margin-left: 6px;
+  font-size: 0.75rem;
+  color: #ced4da;
+}
+
+.sort-icon.active {
+  color: #1a4a7a;
+}
+
+.ticket-table th:hover {
+  background-color: #f0f4f8;
+}
+.export-btn {
+  background-color: white;
+  color: #1a4a7a;
+  border: 1px solid #1a4a7a;
+  float: right;
+}
+
+.export-btn:hover {
+  background-color: #f0f4f8;
+}

@@ -1,30 +1,33 @@
 {
-    "name": "get entry by id",
-    "request": {
-        "url": "/GetEntryById/([0-9]+)",
-        "method": "POST"
+  "name": "get entry by id",
+  "request": {
+    "url": "/GetEntryById/([A-Za-z0-9]+)",
+    "method": "POST"
+  },
+  "responses": {
+    "success": {
+      "default": true,
+      "status": 200,
+      "data": {
+        "ticketId": "T20260001",
+        "reporterId": "202100228",
+        "staffId": "E20212288",
+        "faculty": "Law",
+        "description": "Follow-up call regarding portal access issue",
+        "channel": "Email",
+        "term": "202610",
+        "category": "iConnect",
+        "tags": ["No Internet/Firefox"],
+        "status": "Solved",
+        "startDate": "2026-08-14T08:30:00",
+        "endDate": "2026-08-14T09:15:00"
+      }
     },
-    "responses": {
-        "success": {
-            "default": true,
-            "status": 200,
-            "data": {
-                "entryId": 1,
-                "providerId": "E20241191",
-                "supportedUserId": "123456789",
-                "faculty": "Law",
-                "notes": "Follow-up call regarding portal access issue",
-                "channel": "Email",
-                "term": 202610,
-                "startDateTime": "2026-08-14T08:30:00",
-                "endDateTime": "2026-08-14T09:15:00"
-            }
-        },
-        "not_found": {
-            "status": 404,
-            "data": {
-                "message": "Entry not found"
-            }
-        }
+    "not_found": {
+      "status": 404,
+      "data": {
+        "message": "Entry not found"
+      }
     }
+  }
 }
