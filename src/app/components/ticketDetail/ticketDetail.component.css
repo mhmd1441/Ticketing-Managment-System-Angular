@@ -37,6 +37,8 @@
   background-color: #f8f9fa;
   padding: 12px;
   border-radius: 6px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .card-header{
@@ -44,6 +46,6 @@
   text-align: center;
 }
 .card-primary:not(.card-outline) > .card-header {
-  background-color: #c5c8cb !important;
-   text-align: center;
+  background-color: #1a4a7a !important;
+   align-items: center;
 }

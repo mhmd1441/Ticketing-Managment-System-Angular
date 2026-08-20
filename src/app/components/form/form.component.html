@@ -52,12 +52,22 @@
 
       <div class="form-group">
         <label>Channel</label>
-        <select formControlName="channel" class="form-control">
-          <option value="">-- Select Channel --</option>
-          <option value="Email">Email</option>
-          <option value="WhatsApp">WhatsApp</option>
-          <option value="In-Person">In-Person</option>
-        </select>
+        <div class="channel-group">
+          @for (ch of channels; track ch) {
+            <label
+              class="btn btn-outline-primary channel-btn"
+              [class.active]="form.controls.channel.value === ch"
+            >
+              <input
+                type="radio"
+                formControlName="channel"
+                [value]="ch"
+                autocomplete="off"
+              />
+              {{ ch }}
+            </label>
+          }
+        </div>
         @if (form.controls.channel.invalid && form.controls.channel.touched) {
           <small>Please select a channel</small>
         }
@@ -138,8 +148,21 @@
       </div>
     </div>
     <div class="card-footer">
-      <button type="submit" class="btn submit-btn" [disabled]="form.invalid">
-        Submit Ticket
+      <button
+        type="submit"
+        class="btn submit-btn"
+        [disabled]="form.invalid || isSubmitting"
+      >
+        @if (isSubmitting) {
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          <span> Submitting...</span>
+        } @else {
+          <span>Submit Ticket</span>
+        }
       </button>
     </div>
   </form>

@@ -36,6 +36,7 @@
     "No Internet",
     "Banner"
   ],
+  "statuses": ["Assigned", "In Progress", "Pending", "Escalated", "Solved"],
   "endpoints": {
     "GetEntries": "/GetEntries",
     "SubmitEntry": "/SubmitEntry",

@@ -137,3 +137,21 @@ small {
   color: white;
   cursor: not-allowed;
 }
+.channel-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.channel-btn {
+  border-radius: 6px;
+  padding: 5px 16px;
+  font-size: 0.9rem;
+}
+
+.channel-group input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}

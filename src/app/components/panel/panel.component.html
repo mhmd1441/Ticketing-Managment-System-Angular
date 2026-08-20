@@ -1,7 +1,14 @@
 <h3 class="text-center">Ticket List</h3>
 
-<a routerLink="/form" class="btn mb-3 addTicket">+ New Ticket</a>
-
+<a routerLink="/AdminDashboard/form" class="btn mb-3 addTicket">+ New Ticket</a>
+<div class="d-flex mb-3" style="gap: 10px">
+  <button class="btn export-btn" (click)="exportCsv()">
+    <i class="fas fa-file-csv"></i> Export CSV
+  </button>
+  <button class="btn export-btn" (click)="exportPdf()">
+    <i class="fas fa-file-pdf"></i> Export PDF
+  </button>
+</div>
 @if (isLoading) {
   <app-loadingPreview />
 }
@@ -16,20 +23,48 @@
       type="text"
       placeholder="Search by ticket ID, reporter, faculty, or description..."
       (input)="onSearch($event)"
-      class="form-control"
+      class="form-control search-input"
     />
     <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">
+      <button class="btn btn-outline-secondary search-btn" type="button">
         <i class="fas fa-search"></i>
       </button>
     </div>
   </div>
+
+  <div class="d-flex justify-content-end mb-3" style="gap: 10px">
+    <select
+      class="form-control filter-select"
+      style="max-width: 200px"
+      (change)="onStatusFilterChange($event)"
+    >
+      <option value="">All Statuses</option>
+      @for (s of statuses; track s) {
+        <option [value]="s">{{ s }}</option>
+      }
+    </select>
+
+    <select
+      class="form-control filter-select"
+      style="max-width: 200px"
+      (change)="onFacultyFilterChange($event)"
+    >
+      <option value="">All Faculties</option>
+      @for (f of faculties; track f) {
+        <option [value]="f">{{ f }}</option>
+      }
+    </select>
+  </div>
   <table class="table ticket-table">
     <thead>
       <tr>
-        <th>Ticket ID</th>
+        <th (click)="sortBy('ticketId')" style="cursor: pointer">
+          Ticket ID <i [class]="getSortIcon('ticketId')"></i>
+        </th>
         <th>Reporter ID</th>
-        <th>Faculty</th>
+        <th (click)="sortBy('faculty')" style="cursor: pointer">
+          Faculty <i [class]="getSortIcon('faculty')"></i>
+        </th>
         <th>Category</th>
         <th>Channel</th>
         <th class="description-col">Description</th>
@@ -40,16 +75,20 @@
       @for (entry of filteredEntries; track entry.ticketId) {
         <tr
           class="data-row"
-          [routerLink]="['/panel', entry.ticketId]"
+          [routerLink]="['/AdminDashboard/panel', entry.ticketId]"
           style="cursor: pointer"
         >
-          <td>{{ entry.ticketId }}</td>
-          <td>{{ entry.reporterId }}</td>
+          <td class="highlight-id">{{ entry.ticketId }}</td>
+          <td class="highlight-id">{{ entry.reporterId }}</td>
           <td>{{ entry.faculty }}</td>
           <td>{{ entry.category }}</td>
           <td>{{ entry.channel }}</td>
           <td class="description-col">{{ entry.description }}</td>
-          <td>{{ entry.status }}</td>
+          <td>
+            <span [class]="getStatusClass(entry.status)">{{
+              entry.status
+            }}</span>
+          </td>
         </tr>
       }
     </tbody>

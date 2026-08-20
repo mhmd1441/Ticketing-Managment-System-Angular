@@ -19,15 +19,16 @@ export class EnvironmentService {
   get currentTerm(): string {
     return this.config.currentTerm || '';
   }
-
   get faculties(): string[] {
     return this.config.faculties || [];
   }
   get categories(): string[] {
     return this.config.categories || [];
   }
-
   get tags(): string[] {
     return this.config.tags || [];
   }
+  get statuses(): string[] {
+  return this.config.statuses || [];
+}
 }

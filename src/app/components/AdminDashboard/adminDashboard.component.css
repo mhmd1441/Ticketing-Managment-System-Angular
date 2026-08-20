@@ -1,0 +1,61 @@
+.chart-box {
+  position: relative;
+  height: 300px;
+}
+
+.chart-box-wide {
+  height: 340px;
+}
+
+.chart-title {
+  text-align: center;
+  color: #1a4a7a;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.filter-label {
+  display: block;
+  font-weight: 600;
+  color: #1a4a7a;
+  margin-bottom: 4px;
+}
+.ticket-count {
+  color: #666;
+  font-style: italic;
+}
+.kpi-card {
+  background: #1a4a7a;
+  color: white;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.kpi-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.kpi-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.clear-btn {
+  background-color: white;
+  color: #1a4a7a;
+  border: 1px solid #1a4a7a;
+}
+
+.clear-btn:hover {
+  background-color: #f0f4f8;
+}
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  display: block;
+}

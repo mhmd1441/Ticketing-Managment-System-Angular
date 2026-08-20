@@ -16,6 +16,7 @@ import { EnvironmentService } from '../../services/environment.service';
 import { ApisService } from '../../services/apis.service';
 import { Entry } from '../../models/entry';
 
+declare var $: any;
 @Component({
   selector: 'app-form',
   standalone: true,
@@ -26,6 +27,7 @@ import { Entry } from '../../models/entry';
 export class FormComponent implements OnInit {
   faculties: string[] = [];
   categories: string[] = [];
+  channels: string[] = ['Email', 'WhatsApp', 'In-Person'];
   tags: string[] = [];
 
   form = new FormGroup({
@@ -38,7 +40,10 @@ export class FormComponent implements OnInit {
       Validators.pattern(/^E\d{8}$/),
     ]),
     faculty: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
+    description: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(1000),
+    ]),
     channel: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
     tags: new FormControl<string[]>([], Validators.required),
@@ -74,6 +79,31 @@ export class FormComponent implements OnInit {
           emitEvent: false,
         });
       }
+    });
+  }
+
+  isSubmitting = false;
+
+  showToast(
+    title: string,
+    message: string,
+    type: 'success' | 'info' | 'warning' | 'danger' = 'success',
+  ): void {
+    const icon = {
+      success: 'fas fa-check-circle',
+      info: 'fas fa-info-circle',
+      warning: 'fas fa-exclamation-triangle',
+      danger: 'fas fa-times-circle',
+    }[type];
+
+    $(document).Toasts('create', {
+      class: `bg-${type}`,
+      title,
+      subtitle: 'Just now',
+      body: message,
+      icon,
+      autohide: true,
+      delay: 5000,
     });
   }
 
@@ -121,6 +151,8 @@ export class FormComponent implements OnInit {
       return;
     }
 
+    this.isSubmitting = true;
+
     const formValue = this.form.value;
     const newEntry: Entry = {
       ticketId: '',
@@ -140,10 +172,24 @@ export class FormComponent implements OnInit {
       next: (response) => {
         newEntry.ticketId = this.apisService.generateTicketId();
         this.apisService.addLocalEntry(newEntry);
+        this.showToast(
+          'Success',
+          `Ticket ${newEntry.ticketId} created successfully`,
+          'success',
+        );
         this.form.reset();
-        this.router.navigate(['/panel']);
+        this.isSubmitting = false;
+        this.router.navigate(['/AdminDashboard/panel']);
       },
-      error: (err) => console.error('Error submitting ticket:', err),
+      error: (err) => {
+        console.error('Error submitting ticket:', err);
+        this.showToast(
+          'Error',
+          'Something went wrong while submitting the ticket',
+          'danger',
+        );
+        this.isSubmitting = false;
+      },
     });
   }
 }

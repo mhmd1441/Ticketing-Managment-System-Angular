@@ -1,4 +1,6 @@
-<a routerLink="/panel" class="btn mb-2 BackToList">&larr; BackToList</a>
+<a routerLink="/AdminDashboard/panel" class="btn mb-2 BackToList"
+  >&larr; BackToList</a
+>
 
 @if (isLoading) {
   <app-loadingPreview />
@@ -43,15 +45,58 @@
             <i class="fas fa-calendar-alt"></i> <strong>Term:</strong>
             {{ entry.term }}
           </p>
+          <p>
+            <i class="fas fa-calendar-plus"></i> <strong>Started:</strong>
+            {{ entry.startDate | date: "medium" }}
+          </p>
+          <p>
+            <i class="fas fa-calendar-check"></i> <strong>Ended:</strong>
+            {{ entry.endDate ? (entry.endDate | date: "medium") : "Not yet" }}
+          </p>
         </div>
       </div>
 
       <hr />
+      <h5 class="section-title"><i class="fas fa-flag"></i> Status</h5>
+      <p>
+        <span [class]="getStatusClass(entry.status)">{{ entry.status }}</span>
+      </p>
 
-      <h5 class="section-title">
+      <div class="input-group" style="max-width: 400px">
+        <select
+          class="form-control"
+          [(ngModel)]="selectedStatus"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          @for (s of statuses; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+        <div class="input-group-append">
+          <button
+            class="btn submit-btn"
+            (click)="updateStatus()"
+            [disabled]="isUpdating || selectedStatus === entry.status"
+          >
+            @if (isUpdating) {
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            } @else {
+              <span>Update</span>
+            }
+          </button>
+        </div>
+      </div>
+
+      <hr />
+      <h6 class="section-title">
         <i class="fas fa-align-left"></i> Description
-      </h5>
+      </h6>
       <p class="description-text">{{ entry.description }}</p>
     </div>
+    <hr />
   </div>
 }
