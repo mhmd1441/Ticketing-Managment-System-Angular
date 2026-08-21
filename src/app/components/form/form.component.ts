@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
   form = new FormGroup({
     reporterId: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\d{4}0\d{4}$/),
+      Validators.pattern(/^(\d{4}0\d{4}|F\d{8})$/),
     ]),
     staffId: new FormControl('', [
       Validators.required,

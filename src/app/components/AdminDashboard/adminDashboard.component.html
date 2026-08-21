@@ -33,26 +33,44 @@
         />
       </div>
       <button class="btn clear-btn" (click)="clearDates()">Clear</button>
-      <span class="ml-auto ticket-count"
-        >{{ filtered.length }} ticket(s) in range</span
-      >
+      <div class="ticket-count-wrap ml-auto">
+        <span class="ticket-count"
+          >{{ filtered.length }} ticket(s) in range</span
+        >
+        <span class="ticket-count"
+          >Avg resolution: {{ avgResolutionTime }}</span
+        >
+      </div>
     </div>
   </div>
 
   <div class="row mb-3">
-    <div class="col-md-4">
+    <div class="col-md-3">
+      <div class="kpi-card kpi-split">
+        <div class="kpi-half">
+          <div class="kpi-value">{{ studentCount }}</div>
+          <div class="kpi-label">Students</div>
+        </div>
+        <div class="kpi-divider"></div>
+        <div class="kpi-half">
+          <div class="kpi-value">{{ doctorCount }}</div>
+          <div class="kpi-label">Doctors</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
       <div class="kpi-card">
         <div class="kpi-value">{{ totalTickets }}</div>
         <div class="kpi-label">Total Tickets</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="kpi-card">
         <div class="kpi-value">{{ topFaculty }}</div>
         <div class="kpi-label">Top Faculty</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="kpi-card">
         <div class="kpi-value">{{ topChannel }}</div>
         <div class="kpi-label">Top Channel</div>

@@ -20,9 +20,19 @@
   color: #1a4a7a;
   margin-bottom: 4px;
 }
-.ticket-count {
-  color: #666;
-  font-style: italic;
+.ticket-count-wrap {
+  display: flex;
+  background-color: #f0f4f8;
+  color: #1a4a7a;
+  font-weight: 600;
+  font-style: normal;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
 }
 .kpi-card {
   background: #1a4a7a;
@@ -58,4 +68,21 @@
   font-size: 3rem;
   margin-bottom: 12px;
   display: block;
+}
+.kpi-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-half {
+  flex: 1;
+  text-align: center;
+}
+
+.kpi-divider {
+  width: 1px;
+  align-self: stretch;
+  background-color: rgba(255, 255, 255, 0.35);
+  margin: 0 10px;
 }

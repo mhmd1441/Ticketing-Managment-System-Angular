@@ -30,6 +30,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
   totalTickets = 0;
   topFaculty = '—';
   topChannel = '—';
+  avgResolutionTime = '—';
+  studentCount = 0;
+  doctorCount = 0;
 
   @ViewChild('facultyChart') facultyCanvas?: ElementRef<HTMLCanvasElement>;
   @ViewChild('channelChart') channelCanvas?: ElementRef<HTMLCanvasElement>;
@@ -111,6 +114,18 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
     this.totalTickets = this.filtered.length;
     this.topFaculty = this.topKey(this.countBy((e) => e.faculty));
     this.topChannel = this.topKey(this.countBy((e) => e.channel));
+
+    const reporterCounts = this.countBy((e) =>
+      this.getReporterType(e.reporterId),
+    );
+    this.studentCount = reporterCounts['Student'] || 0;
+    this.doctorCount = reporterCounts['Doctor'] || 0;
+
+    this.avgResolutionTime = this.calculateAvgResolutionTime();
+  }
+
+  private getReporterType(reporterId: string): string {
+    return reporterId.startsWith('F') ? 'Doctor' : 'Student';
   }
 
   private topKey(counts: Record<string, number>): string {
@@ -140,6 +155,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
     this.charts.forEach((c) => c.destroy());
     this.charts = [];
     if (this.filtered.length === 0) return;
+    const reporterType = this.countBy((e) =>
+      this.getReporterType(e.reporterId),
+    );
     const faculty = this.countBy((e) => e.faculty);
     const channel = this.countBy((e) => e.channel);
     const category = this.countBy((e) => e.category);
@@ -279,5 +297,29 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
         },
       }),
     );
+  }
+  private calculateAvgResolutionTime(): string {
+    const solved = this.filtered.filter((e) => e.endDate);
+    if (solved.length === 0) return '—';
+
+    const totalMs = solved.reduce((sum, e) => {
+      const start = new Date(e.startDate).getTime();
+      const end = new Date(e.endDate!).getTime();
+      return sum + (end - start);
+    }, 0);
+
+    const avgMs = totalMs / solved.length;
+    return this.formatDuration(avgMs);
+  }
+
+  private formatDuration(ms: number): string {
+    const totalMinutes = Math.round(ms / 60000);
+    const days = Math.floor(totalMinutes / (60 * 24));
+    const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+    const minutes = totalMinutes % 60;
+
+    if (days > 0) return `${days}d ${hours}h`;
+    if (hours > 0) return `${hours}h ${minutes}m`;
+    return `${minutes}m`;
   }
 }

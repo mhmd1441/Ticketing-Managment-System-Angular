@@ -6,7 +6,7 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card-body">
       <div class="form-group">
-        <label>Reporter ID (Student)</label>
+        <label>Reporter ID (Student or Doctor)</label>
         <input formControlName="reporterId" class="form-control" />
         @if (
           form.controls.reporterId.invalid && form.controls.reporterId.touched
@@ -42,6 +42,7 @@
           formControlName="description"
           class="form-control"
           rows="4"
+          maxlength="1000"
         ></textarea>
         @if (
           form.controls.description.invalid && form.controls.description.touched

@@ -18,7 +18,7 @@
           "channel": "Email",
           "term": "202610",
           "category": "iConnect",
-          "tags": ["No Internet/Firefox"],
+          "tags": ["No Internet", "Firefox"],
           "status": "Solved",
           "startDate": "2026-08-14T08:30:00",
           "endDate": "2026-08-14T09:15:00"
@@ -32,7 +32,7 @@
           "channel": "In-Person",
           "term": "202610",
           "category": "Banner",
-          "tags": ["Forget Password/Credentials"],
+          "tags": ["Forget Password","Credentials"],
           "status": "Solved",
           "startDate": "2026-08-14T08:30:00",
           "endDate": "2026-08-14T09:15:00"
@@ -46,7 +46,7 @@
           "channel": "Phone",
           "term": "202610",
           "category": "iConnect",
-          "tags": ["Browser Issue/Android"],
+          "tags": ["Browser Issue","Android"],
           "status": "Solved",
           "startDate": "2026-08-14T08:30:00",
           "endDate": "2026-08-14T09:15:00"
