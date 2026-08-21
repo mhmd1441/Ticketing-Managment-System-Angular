@@ -163,7 +163,6 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
     const category = this.countBy((e) => e.category);
     const tags = this.countTags();
 
-    const brand = '#1a4a7a';
     const palette = [
       '#1a4a7a',
       '#28a745',
@@ -196,7 +195,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
       '#CBD5E1',
     ];
 
-    const mutedPallete = ['#16A085', '#27AE60', '#27AE80', '#29b473'];
+    const mutedPalette = ['#16A085', '#27AE60', '#27AE80', '#29b473'];
 
     if (
       !this.facultyCanvas ||
@@ -260,7 +259,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewChecked {
             {
               label: 'Tickets',
               data: Object.values(category),
-              backgroundColor: mutedPallete,
+              backgroundColor: mutedPalette,
               borderRadius: 6,
             },
           ],

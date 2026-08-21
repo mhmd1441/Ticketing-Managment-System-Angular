@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-loadingPreview',
+  selector: 'app-loading-preview',
   standalone: true,
   imports: [],
   templateUrl: './loadingPreview.component.html',
